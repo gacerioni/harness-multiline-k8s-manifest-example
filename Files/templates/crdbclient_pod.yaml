@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: {{.Values.name}}-pod
+spec:
+  containers:
+  - name: {{.Values.name}}
+    image: busybox
+    env:
+      - name: COCKROACH_HOST
+        value: "free-tier.gcp-us-central1.cockroachlabs.cloud:26257"
+      - name: COCKROACH_INSECURE
+        value: "false"        
+      - name: DATABASE_NAME
+        value: "fuzzy-whatever.defaultdb" 
+      - name: COCKROACH_USER
+        value: "gabsthecreator"
+      - name: CRDB_KEY
+        value: |
+{{.Values.crdb_key | b64dec | indent 12}}
+    command: ["/bin/sh", "-c", "env"]
+  restartPolicy: Never
