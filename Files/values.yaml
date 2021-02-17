@@ -1,0 +1,6 @@
+name: crdbclient-dummy-busybox
+
+image: ${artifact.metadata.image}
+
+createNamespace: true
+namespace: ${infra.kubernetes.namespace}
